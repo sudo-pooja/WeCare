@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* WeCare Brand Colors - Enhanced */
+    --background: 180 25% 97%;
+    --foreground: 207 16% 26%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 207 16% 26%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 207 16% 26%;
+    
+    /* Vibrant teal primary */
+    --primary: 179 75% 25%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Soft mint green secondary */
+    --secondary: 180 30% 94%;
+    --secondary-foreground: 207 16% 26%;
+    
+    --muted: 180 25% 90%;
+    --muted-foreground: 207 10% 45%;
+    
+    /* Warm peach accent */
+    --accent: 15 100% 92%;
+    --accent-foreground: 179 75% 25%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 180 20% 88%;
+    --input: 180 20% 88%;
+    --ring: 179 75% 25%;
+    
+    --radius: 0.75rem;
+    
+    /* Enhanced color palette */
+    --primary-light: 179 60% 85%;
+    --accent-light: 15 100% 96%;
+    --teal-glow: 179 75% 25%;
+    --peach-glow: 15 100% 75%;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Palette colors for navigation */
+    --palette-golden: 45 85% 55%;
+    --palette-light-cream: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 207 16% 15%;
+    --foreground: 0 0% 98%;
+    
+    --card: 207 16% 18%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 207 16% 18%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 179 70% 35%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 180 15% 22%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 180 10% 25%;
+    --muted-foreground: 207 10% 60%;
+    
+    --accent: 15 90% 85%;
+    --accent-foreground: 179 80% 20%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 180 10% 30%;
+    --input: 180 10% 30%;
+    --ring: 179 70% 35%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground;
+  }
+}
