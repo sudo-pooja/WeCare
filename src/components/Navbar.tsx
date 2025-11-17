@@ -1,24 +1,48 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import logoImage from "@/assets/Logo.png";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsOpen(false);
+    // If not on home page, navigate to home first
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation, then scroll to section
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
+    setIsOpen(false);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleLogoClick = () => {
+    // Always navigate to home page
+    if (location.pathname === "/") {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Navigate to home page
+      navigate("/");
+    }
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -60,7 +84,7 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between w-full">
           <button
-            onClick={scrollToTop}
+            onClick={handleLogoClick}
             className="flex items-center gap-2 group cursor-pointer"
             aria-label="WeCare Home"
           >
@@ -87,7 +111,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <Button 
               className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-              onClick={() => scrollToSection("pricing")}
+              onClick={() => navigate("/login")}
             >
               Get Started
             </Button>
@@ -102,13 +126,17 @@ const Navbar = () => {
                 </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-white">
                 <div className="flex flex-col gap-6 mt-8">
-                  <div className="flex items-center gap-2 mb-4">
+                  <button
+                    onClick={handleLogoClick}
+                    className="flex items-center gap-2 mb-4 group cursor-pointer"
+                    aria-label="WeCare Home"
+                  >
                     <img 
                       src={logoImage} 
                       alt="WeCare Logo" 
-                      className="h-12 w-auto"
+                      className="h-12 w-auto transition-transform group-hover:scale-110"
                     />
-                  </div>
+                  </button>
                   
                   <nav className="flex flex-col gap-4">
                     {navLinks.map((link) => (
@@ -124,7 +152,10 @@ const Navbar = () => {
                   
                   <Button 
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300 mt-4"
-                    onClick={() => scrollToSection("pricing")}
+                    onClick={() => {
+                      navigate("/login");
+                      setIsOpen(false);
+                    }}
                   >
                     Get Started
                   </Button>

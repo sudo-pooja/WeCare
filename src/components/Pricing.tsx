@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Check, X, CheckCircle2 } from "lucide-react";
@@ -69,6 +70,7 @@ const pricingPlans = [
 ];
 
 const Pricing = () => {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   const handleSelectPlan = (planName: string) => {
@@ -76,6 +78,15 @@ const Pricing = () => {
     setSelectedPlan(planName);
     console.log("Selected plan:", planName);
     // You can add additional logic here, like opening a checkout modal
+  };
+
+  const handleGetStarted = (e: React.MouseEvent, planName: string) => {
+    e.stopPropagation();
+    if (planName === "Basic") {
+      navigate("/login");
+    } else {
+      handleSelectPlan(planName);
+    }
   };
 
   return (
@@ -148,10 +159,7 @@ const Pricing = () => {
                 </ul>
 
                 <Button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSelectPlan(plan.name);
-                  }}
+                  onClick={(e) => handleGetStarted(e, plan.name)}
                   className={`w-full shadow-md transition-all duration-300 ${
                     isSelected
                       ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg scale-105"
